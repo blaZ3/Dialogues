@@ -1,0 +1,26 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.dialogues.itemsList.ItemsListFragment">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_items_list"
+            android:layout_alignParentTop="true"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:elevation="5dp"
+            android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar_items_list"
+            tools:listitem="@layout/layout_item_list_item"/>
+
+    </RelativeLayout>
+
+</layout>

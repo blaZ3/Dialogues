@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.dialogues.databinding.ActivityMainBinding;
+import com.example.dialogues.itemsList.ItemsListFragment;
 import com.example.dialogues.welcome.WelcomeFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(dataBinding.frameContainer.getId(),
-                        WelcomeFragment.newInstance(), WelcomeFragment.TAG)
+                        ItemsListFragment.newInstance(), WelcomeFragment.TAG)
                 .commit();
     }
 }
