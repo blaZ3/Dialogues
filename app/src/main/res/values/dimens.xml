@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="sixteen_dp">16dp</dimen>
+
+    <dimen name="error_message_text_size">54sp</dimen>
+    <dimen name="retry_button_top_margin">44dp</dimen>
+    <dimen name="city_name">36sp</dimen>
+    <dimen name="main_temp">96sp</dimen>
+    <dimen name="day">16sp</dimen>
+    <dimen name="day_temp">16sp</dimen>
+
+</resources>
