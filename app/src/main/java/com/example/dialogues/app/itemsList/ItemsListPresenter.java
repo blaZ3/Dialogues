@@ -1,6 +1,6 @@
-package com.example.dialogues.itemsList;
+package com.example.dialogues.app.itemsList;
 
-import com.example.dialogues.utils.ILogger;
+import com.example.dialogues.utils.log.ILogger;
 
 /**
  * Created by vivek on 26/02/18.

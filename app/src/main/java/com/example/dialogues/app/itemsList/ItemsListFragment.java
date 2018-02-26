@@ -1,4 +1,4 @@
-package com.example.dialogues.itemsList;
+package com.example.dialogues.app.itemsList;
 
 
 import android.content.Context;
@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.dialogues.R;
 import com.example.dialogues.databinding.FragmentItemsListBinding;
-import com.example.dialogues.utils.Logger;
+import com.example.dialogues.utils.log.Logger;
 
 
 public class ItemsListFragment extends Fragment implements ItemsListScreen{

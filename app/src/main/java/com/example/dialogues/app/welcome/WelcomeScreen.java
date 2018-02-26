@@ -1,4 +1,4 @@
-package com.example.dialogues.welcome;
+package com.example.dialogues.app.welcome;
 
 import com.example.dialogues.utils.BaseScreen;
 

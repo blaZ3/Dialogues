@@ -1,4 +1,4 @@
-package com.example.dialogues.itemsList;
+package com.example.dialogues.app.itemsList;
 
 import com.example.dialogues.utils.BaseScreen;
 

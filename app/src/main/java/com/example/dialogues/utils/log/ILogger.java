@@ -1,4 +1,4 @@
-package com.example.dialogues.utils;
+package com.example.dialogues.utils.log;
 
 /**
  * Created by vivek on 05/11/17.

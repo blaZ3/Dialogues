@@ -1,4 +1,4 @@
-package com.example.dialogues.itemsList;
+package com.example.dialogues.app.itemsList;
 
 /**
  * Created by vivek on 26/02/18.

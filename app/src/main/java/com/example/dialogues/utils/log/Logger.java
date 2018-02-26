@@ -1,4 +1,4 @@
-package com.example.dialogues.utils;
+package com.example.dialogues.utils.log;
 
 import android.util.Log;
 

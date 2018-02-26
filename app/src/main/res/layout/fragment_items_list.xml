@@ -4,7 +4,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.dialogues.itemsList.ItemsListFragment">
+        tools:context="com.example.dialogues.app.itemsList.ItemsListFragment">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_items_list"

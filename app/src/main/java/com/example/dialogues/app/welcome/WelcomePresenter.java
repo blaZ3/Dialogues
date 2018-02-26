@@ -1,8 +1,6 @@
-package com.example.dialogues.welcome;
+package com.example.dialogues.app.welcome;
 
-import android.util.Log;
-
-import com.example.dialogues.utils.ILogger;
+import com.example.dialogues.utils.log.ILogger;
 
 /**
  * Created by vivek on 26/02/18.

@@ -1,4 +1,4 @@
-package com.example.dialogues.welcome;
+package com.example.dialogues.app.welcome;
 
 
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dialogues.R;
-import com.example.dialogues.utils.Logger;
+import com.example.dialogues.utils.log.Logger;
 
 public class WelcomeFragment extends Fragment implements WelcomeScreen{
     public static final String TAG = WelcomeFragment.class.getSimpleName();

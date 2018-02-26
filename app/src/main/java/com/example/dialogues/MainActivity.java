@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.dialogues.databinding.ActivityMainBinding;
-import com.example.dialogues.itemsList.ItemsListFragment;
-import com.example.dialogues.welcome.WelcomeFragment;
+import com.example.dialogues.app.itemsList.ItemsListFragment;
+import com.example.dialogues.app.welcome.WelcomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
