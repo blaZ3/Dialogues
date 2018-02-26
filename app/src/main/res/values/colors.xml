@@ -7,8 +7,6 @@
 
     <color name="white">#FFFFFF</color>
     <color name="error_background">#E85959</color>
-    <color name="day">#2a2a2a</color>
-    <color name="day_temp">#2a2a2a</color>
-    <color name="city_name">#556799</color>
+    <color name="text">#3f4041</color>
 
 </resources>

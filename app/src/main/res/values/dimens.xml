@@ -3,11 +3,8 @@
 
     <dimen name="sixteen_dp">16dp</dimen>
 
-    <dimen name="error_message_text_size">54sp</dimen>
-    <dimen name="retry_button_top_margin">44dp</dimen>
-    <dimen name="city_name">36sp</dimen>
-    <dimen name="main_temp">96sp</dimen>
-    <dimen name="day">16sp</dimen>
-    <dimen name="day_temp">16sp</dimen>
+    <dimen name="text_big">36sp</dimen>
+    <dimen name="text_normal">14sp</dimen>
+    <dimen name="text_small">12sp</dimen>
 
 </resources>
