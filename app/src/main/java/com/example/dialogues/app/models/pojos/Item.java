@@ -1,4 +1,4 @@
-package com.example.dialogues.network.pojos;
+package com.example.dialogues.app.models.pojos;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

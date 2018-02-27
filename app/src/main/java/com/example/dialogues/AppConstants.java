@@ -6,5 +6,5 @@ package com.example.dialogues;
 
 public class AppConstants {
 
-    public static String ROOT = "https://api.myjson.com/bins";
+    public static String ROOT = "https://api.myjson.com/bins/";
 }

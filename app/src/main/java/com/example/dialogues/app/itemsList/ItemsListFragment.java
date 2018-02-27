@@ -6,22 +6,28 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dialogues.R;
+import com.example.dialogues.app.models.pojos.Item;
 import com.example.dialogues.databinding.FragmentItemsListBinding;
+import com.example.dialogues.utils.BaseFragment;
 import com.example.dialogues.utils.log.Logger;
 
+import java.util.ArrayList;
 
-public class ItemsListFragment extends Fragment implements ItemsListScreen{
+
+public class ItemsListFragment extends BaseFragment implements ItemsListScreen{
     private static final String TAG = ItemsListFragment.class.getSimpleName();
 
     FragmentItemsListBinding dataBinding;
 
-    ItemsListPresenter itemsListPresenter;
+    private ItemsListPresenter itemsListPresenter;
+    private ItemListAdapter adapter;
 
     public ItemsListFragment() {
         // Required empty public constructor
@@ -39,7 +45,8 @@ public class ItemsListFragment extends Fragment implements ItemsListScreen{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        itemsListPresenter = new ItemsListPresenter(this, new Logger());
+        itemsListPresenter = new ItemsListPresenter(this, getMainActivity().getCurrItems(),
+                new Logger());
     }
 
     @Override
@@ -56,6 +63,8 @@ public class ItemsListFragment extends Fragment implements ItemsListScreen{
                 R.layout.fragment_items_list, container, false);
 
         initToolbar();
+
+        doInit();
 
         return dataBinding.getRoot();
     }
@@ -79,31 +88,55 @@ public class ItemsListFragment extends Fragment implements ItemsListScreen{
 
     @Override
     public void doInit() {
+        itemsListPresenter.loadItems();
+    }
+
+    ItemListAdapter.ItemListAdapterInterface itemListAdapterInterface = new ItemListAdapter.ItemListAdapterInterface() {
+        @Override
+        public void itemSelected(int position) {
+            Log.d(TAG, "itemSelected() called with: position = [" + position + "]");
+            getMainActivity().showToast(getMainActivity().getCurrItems().get(position).getDesc());
+        }
+    };
+
+    @Override
+    public void onItemsLoaded(ArrayList<Item> items) {
+        adapter = new ItemListAdapter(getActivity(), items,
+                itemListAdapterInterface);
+
+        dataBinding.recyclerList.setLayoutManager(new LinearLayoutManager(getActivity(),
+                LinearLayoutManager.VERTICAL, false));
+        dataBinding.recyclerList.setAdapter(adapter);
+    }
+
+
+    @Override
+    public void showLoadingProgress() {
 
     }
 
     @Override
-    public void onItemsLoaded() {
-
-    }
-
-    @Override
-    public void onContinue() {
-
-    }
-
-    @Override
-    public void goToNext() {
-
-    }
-
-    @Override
-    public void goToMain() {
+    public void hideLoadingProgress() {
 
     }
 
     @Override
     public void onBackPressed() {
+        getMainActivity().onBackPressed();
+    }
+
+    @Override
+    public void showNetworkError() {
+
+    }
+
+    @Override
+    public void showApiError() {
+
+    }
+
+    @Override
+    public void showError(String msg) {
 
     }
 }

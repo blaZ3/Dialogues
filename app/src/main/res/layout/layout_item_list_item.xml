@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="item"
+            type="com.example.dialogues.app.models.pojos.Item"/>
+    </data>
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +30,8 @@
                 android:textColor="@color/text"
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="center_vertical"
-                tools:text="Item Text"/>
+                tools:text="Item Text"
+                android:text="@{item.desc}"/>
 
 
             <ImageView

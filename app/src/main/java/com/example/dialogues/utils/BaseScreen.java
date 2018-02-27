@@ -8,4 +8,11 @@ public interface BaseScreen {
 
     void doInit();
 
+    void showLoadingProgress();
+    void hideLoadingProgress();
+
+    void showNetworkError();
+    void showApiError();
+    void showError(String msg);
+
 }

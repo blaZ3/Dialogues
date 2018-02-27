@@ -1,6 +1,6 @@
 package com.example.dialogues.network;
 
-import com.example.dialogues.network.pojos.ItemResponse;
+import com.example.dialogues.app.models.pojos.ItemResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -11,7 +11,7 @@ import retrofit2.http.GET;
 
 public interface DialogueService {
 
-    @GET("/gigal")
+    @GET("gigal")
     Call<ItemResponse> getDialogues();
 
 }

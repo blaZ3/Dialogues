@@ -5,7 +5,7 @@ package com.example.dialogues.network;
  */
 
 public class NetworkResponse {
-
+    private static final String TAG = NetworkResponse.class.getSimpleName();
 
     public enum Status{
         SUCCESS,
@@ -14,11 +14,11 @@ public class NetworkResponse {
     }
 
     Status status;
-    Object data;
 
-    public NetworkResponse(Status status, Object data) {
+    public NetworkResponse() {}
+
+    public NetworkResponse(Status status) {
         this.status = status;
-        this.data = data;
     }
 
     public Status getStatus() {
@@ -27,13 +27,5 @@ public class NetworkResponse {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
     }
 }

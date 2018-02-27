@@ -1,18 +1,26 @@
 package com.example.dialogues.app.welcome;
 
-
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dialogues.R;
+import com.example.dialogues.app.models.pojos.Item;
+import com.example.dialogues.databinding.FragmentWelcomeBinding;
+import com.example.dialogues.utils.BaseFragment;
 import com.example.dialogues.utils.log.Logger;
 
-public class WelcomeFragment extends Fragment implements WelcomeScreen{
+import java.util.ArrayList;
+import java.util.List;
+
+public class WelcomeFragment extends BaseFragment implements WelcomeScreen{
     public static final String TAG = WelcomeFragment.class.getSimpleName();
+
+    FragmentWelcomeBinding dataBinding;
 
     WelcomePresenter welcomePresenter;
 
@@ -42,26 +50,42 @@ public class WelcomeFragment extends Fragment implements WelcomeScreen{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
+        dataBinding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_welcome, container, false);
 
-        doInit();
+        dataBinding.btnWelcomeContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getMainActivity().navigateToListFragment();
+            }
+        });
 
-        return rootView;
+        return dataBinding.getRoot();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        doInit();
+    }
 
 
     //view methods
 
     @Override
     public void doInit() {
+        Log.d(TAG, "doInit() called");
+
+        dataBinding.progressWelcome.setVisibility(View.GONE);
+        dataBinding.btnWelcomeContinue.setVisibility(View.GONE);
+
         welcomePresenter.getItems();
     }
 
     @Override
-    public void goToList() {
-
+    public void gotItems(ArrayList<Item> items) {
+        getMainActivity().setCurrItems(items);
+        dataBinding.btnWelcomeContinue.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -72,5 +96,20 @@ public class WelcomeFragment extends Fragment implements WelcomeScreen{
     @Override
     public void showApiError() {
 
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
+
+    @Override
+    public void showLoadingProgress() {
+        dataBinding.progressWelcome.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoadingProgress() {
+        dataBinding.progressWelcome.setVisibility(View.GONE);
     }
 }
