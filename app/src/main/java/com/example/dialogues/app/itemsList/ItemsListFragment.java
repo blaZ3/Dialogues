@@ -96,6 +96,7 @@ public class ItemsListFragment extends BaseFragment implements ItemsListScreen{
         public void itemSelected(int position) {
             Log.d(TAG, "itemSelected() called with: position = [" + position + "]");
             getMainActivity().showToast(getMainActivity().getCurrItems().get(position).getDesc());
+            getMainActivity().navigateToItemFragment(position);
         }
     };
 
@@ -112,12 +113,12 @@ public class ItemsListFragment extends BaseFragment implements ItemsListScreen{
 
     @Override
     public void showLoadingProgress() {
-
+        dataBinding.progressList.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoadingProgress() {
-
+        dataBinding.progressList.setVisibility(View.GONE);
     }
 
     @Override
@@ -125,18 +126,7 @@ public class ItemsListFragment extends BaseFragment implements ItemsListScreen{
         getMainActivity().onBackPressed();
     }
 
-    @Override
-    public void showNetworkError() {
 
-    }
 
-    @Override
-    public void showApiError() {
 
-    }
-
-    @Override
-    public void showError(String msg) {
-
-    }
 }

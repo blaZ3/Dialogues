@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.dialogues.app.dialouge.ItemFragment;
 import com.example.dialogues.app.models.pojos.Item;
 import com.example.dialogues.databinding.ActivityMainBinding;
 import com.example.dialogues.app.itemsList.ItemsListFragment;
@@ -15,6 +16,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    private final String TAG_MAIN = "TAG_MAIN";
+    private final String TAG_LIST = "TAG_LIST";
+    private final String TAG_ITEM = "TAG_ITEM";
 
     ActivityMainBinding dataBinding;
 
@@ -30,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .add(dataBinding.frameContainer.getId(),
                         WelcomeFragment.newInstance(), WelcomeFragment.TAG)
-                .addToBackStack("Main")
+                .addToBackStack(TAG_MAIN)
                 .commit();
     }
 
@@ -51,8 +56,24 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(dataBinding.frameContainer.getId(), ItemsListFragment.newInstance())
-                .addToBackStack("List")
+                .addToBackStack(TAG_LIST)
                 .commit();
     }
+
+    public void navigateToItemFragment(int position){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(dataBinding.frameContainer.getId(), ItemFragment.newInstance(position))
+                .addToBackStack(TAG_ITEM)
+                .commit();
+    }
+
+
+    public void navigateToMain(){
+        getSupportFragmentManager()
+                .popBackStack(TAG_MAIN, 0);
+    }
+
+
 
 }

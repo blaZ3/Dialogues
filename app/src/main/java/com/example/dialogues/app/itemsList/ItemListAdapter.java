@@ -50,7 +50,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemLi
 
     @Override
     public void onBindViewHolder(ItemListViewHolder holder, int position) {
-        holder.dataBinding.setVariable(BR.item, items.get(position));
+        holder.dataBinding.setItem(items.get(position));
     }
 
     @Override
