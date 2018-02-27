@@ -8,5 +8,6 @@
 
     <string name="error_network">Please check your network</string>
     <string name="error_api">Some error happened please try again</string>
+    <string name="error_generic">Some error happened please try again</string>
 
 </resources>

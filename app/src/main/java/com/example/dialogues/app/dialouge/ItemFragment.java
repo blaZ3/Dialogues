@@ -1,27 +1,37 @@
 package com.example.dialogues.app.dialouge;
 
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.dialogues.DownloadService;
 import com.example.dialogues.R;
 import com.example.dialogues.app.models.pojos.Item;
 import com.example.dialogues.databinding.FragmentItemBinding;
+import com.example.dialogues.network.download.ServiceSoundDownloader;
 import com.example.dialogues.utils.BaseFragment;
+import com.example.dialogues.utils.MusicPlayer;
 import com.example.dialogues.utils.log.Logger;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 
 public class ItemFragment extends BaseFragment implements ItemScreen{
     private static final String TAG = ItemFragment.class.getSimpleName();
 
     private static final String ARG_POSITION = "ARG_ITEM_ID";
-    private int currPosition;
 
     private ItemPresenter itemPresenter;
     private FragmentItemBinding dataBinding;
@@ -40,17 +50,15 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        itemPresenter = new ItemPresenter(this, getMainActivity().getCurrItems(),
-                new Logger());
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            currPosition = getArguments().getInt(ARG_POSITION);
+            int currPosition = getArguments().getInt(ARG_POSITION);
+            itemPresenter = new ItemPresenter(this,
+                    getMainActivity().getCurrItems(),
+                    currPosition,
+                    new Logger(),
+                    new ServiceSoundDownloader(getMainActivity()));
         }
     }
 
@@ -69,25 +77,56 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
 
         doInit();
 
+        try{
+            Log.d(TAG, "onCreateView: registering downloadBroadcastReceiver");
+//            getMainActivity().getApplicationContext().registerReceiver(downloadBroadcastReceiver,
+//                    new IntentFilter(DownloadService.DOWNLOAD_BROADCAST));
+
+            LocalBroadcastManager.getInstance(getMainActivity().getApplicationContext()).registerReceiver(downloadBroadcastReceiver,
+                    new IntentFilter(DownloadService.DOWNLOAD_BROADCAST));
+        }catch (Exception ex){
+            ex.printStackTrace();
+            getMainActivity().showToast(getMainActivity().getString(R.string.error_generic));
+        }
+
         return dataBinding.getRoot();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        try{
+            getMainActivity().getApplicationContext().unregisterReceiver(downloadBroadcastReceiver);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
 
     @Override
     public void doInit() {
         Log.d(TAG, "doInit() called");
-        itemPresenter.showCurrItem(currPosition);
+        itemPresenter.showCurrItem();
     }
 
     @Override
     public void showItem(Item item) {
         dataBinding.setItem(item);
+
+        itemPresenter.getSoundFile(item);
+    }
+
+    @Override
+    public void playSound(File file) {
+        getMainActivity().showToast("Playing file:" + file.getAbsolutePath());
+
+        MusicPlayer.getInstance().stop();
+        MusicPlayer.getInstance().play(file.getAbsolutePath());
     }
 
     @Override
     public void goToNext() {
-        currPosition++;
-        itemPresenter.showCurrItem(currPosition);
+        itemPresenter.incrementPosition();
+        itemPresenter.showCurrItem();
     }
 
     @Override
@@ -95,4 +134,25 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
         //pop other fragment and go to main
         getMainActivity().navigateToMain();
     }
+
+
+
+    BroadcastReceiver downloadBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "onReceive() called with: context = [" + context + "], intent = [" + intent + "]");
+            Bundle b = intent.getExtras();
+
+            if (b.getString(DownloadService.TAG_STATUS).equals(DownloadService.STATUS_COMPLETE)){
+                String filePath = b.getString(DownloadService.TAG_FILE_PATH);
+                String itemLink = b.getString(DownloadService.TAG_ITEM_LINK);
+                String itemId = b.getString(DownloadService.TAG_ITEM_ID);
+
+                itemPresenter.gotDownload(filePath, itemLink, itemId);
+            }else {
+                showError(getMainActivity().getString(R.string.error_generic));
+            }
+
+        }
+    };
 }

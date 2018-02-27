@@ -1,11 +1,15 @@
 package com.example.dialogues.app.models;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import com.example.dialogues.DownloadService;
 import com.example.dialogues.app.models.pojos.Item;
 import com.example.dialogues.app.models.pojos.ItemResponse;
 import com.example.dialogues.network.DialogueService;
 import com.example.dialogues.network.NetworkResponse;
+import com.example.dialogues.utils.FileHelper;
 import com.example.dialogues.utils.log.ILogger;
 
 import java.util.List;
@@ -61,9 +65,6 @@ public class ItemModel {
 
             }
         });
-
-
-
         return listObservable;
     }
 
