@@ -17,4 +17,5 @@ public interface ItemScreen extends BaseScreen{
     void goToNext();
     void goToMain();
 
+    void onBackPressed();
 }

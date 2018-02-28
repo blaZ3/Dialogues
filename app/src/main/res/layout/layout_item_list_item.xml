@@ -40,7 +40,8 @@
                 android:layout_height="45dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                tools:src="@mipmap/ic_launcher"/>
+                android:tint="@color/colorAccent"
+                android:src="@drawable/ic_play"/>
 
         </RelativeLayout>
 

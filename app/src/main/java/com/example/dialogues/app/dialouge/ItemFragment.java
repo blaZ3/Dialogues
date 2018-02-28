@@ -9,6 +9,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,6 +76,8 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
             }
         });
 
+        initToolbar();
+
         doInit();
 
         try{
@@ -88,6 +91,18 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
         }
 
         return dataBinding.getRoot();
+    }
+
+    private void initToolbar() {
+        ((AppCompatActivity)getActivity()).setSupportActionBar(dataBinding.toolbarItem);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("");
+        dataBinding.toolbarItem.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back_arrow_white));
+        dataBinding.toolbarItem.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
@@ -114,6 +129,8 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
     public void showItem(Item item) {
         dataBinding.setItem(item);
 
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(item.getDesc());
+
         itemPresenter.getSoundFile(item);
 
         itemPresenter.getNextSoundFile();
@@ -137,6 +154,10 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
         getMainActivity().navigateToMain();
     }
 
+    @Override
+    public void onBackPressed() {
+        getMainActivity().onBackPressed();
+    }
 
 
     BroadcastReceiver downloadBroadcastReceiver = new BroadcastReceiver() {

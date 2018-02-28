@@ -36,6 +36,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Continue"
+            android:textColor="@color/white"
+            android:background="@drawable/custom_btn_background"
+            android:fontFamily="@font/roboto_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_welcome" />
@@ -48,6 +51,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Retry"
+            android:textColor="@color/white"
+            android:background="@drawable/custom_btn_background"
+            android:fontFamily="@font/roboto_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_welcome" />

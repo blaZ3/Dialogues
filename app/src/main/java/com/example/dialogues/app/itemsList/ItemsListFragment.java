@@ -73,7 +73,7 @@ public class ItemsListFragment extends BaseFragment implements ItemsListScreen{
 
     private void initToolbar() {
         ((AppCompatActivity)getActivity()).setSupportActionBar(dataBinding.toolbarItemsList);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Dialogues");
         dataBinding.toolbarItemsList.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back_arrow_white));
         dataBinding.toolbarItemsList.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
