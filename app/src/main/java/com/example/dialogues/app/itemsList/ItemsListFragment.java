@@ -112,6 +112,10 @@ public class ItemsListFragment extends BaseFragment implements ItemsListScreen{
         itemsListPresenter.downloadFirst();
     }
 
+    @Override
+    public void onItemsError() {
+        getMainActivity().showToast(getString(R.string.error_generic));
+    }
 
     @Override
     public void showLoadingProgress() {

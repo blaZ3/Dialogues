@@ -21,6 +21,13 @@ public class Item {
     @Expose
     String audio;
 
+    public Item() {}
+
+    public Item(String itemId, String desc, String audio){
+        this.itemId = itemId;
+        this.desc = desc;
+        this.audio = audio;
+    }
 
     public String getItemId() {
         return itemId;

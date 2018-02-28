@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public interface ItemsListScreen extends BaseScreen {
 
     void onItemsLoaded(ArrayList<Item> items);
+    void onItemsError();
 
     void onBackPressed();
 

@@ -32,6 +32,8 @@ public class ItemsListPresenter {
     public void loadItems(){
         if (items != null){
             screen.onItemsLoaded(items);
+        }else {
+            screen.onItemsError();
         }
     }
 
