@@ -80,16 +80,6 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
 
         doInit();
 
-        try{
-            Log.d(TAG, "onCreateView: registering downloadBroadcastReceiver");
-            LocalBroadcastManager.getInstance(getMainActivity().getApplicationContext())
-                    .registerReceiver(downloadBroadcastReceiver,
-                            new IntentFilter(DownloadService.DOWNLOAD_BROADCAST));
-        }catch (Exception ex){
-            ex.printStackTrace();
-            getMainActivity().showToast(getMainActivity().getString(R.string.error_generic));
-        }
-
         return dataBinding.getRoot();
     }
 
@@ -121,7 +111,16 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
 
     @Override
     public void doInit() {
-        Log.d(TAG, "doInit() called");
+        try{
+            Log.d(TAG, "onCreateView: registering downloadBroadcastReceiver");
+            LocalBroadcastManager.getInstance(getMainActivity().getApplicationContext())
+                    .registerReceiver(downloadBroadcastReceiver,
+                            new IntentFilter(DownloadService.DOWNLOAD_BROADCAST));
+        }catch (Exception ex){
+            ex.printStackTrace();
+            getMainActivity().showToast(getMainActivity().getString(R.string.error_generic));
+        }
+
         itemPresenter.showCurrItem();
     }
 
@@ -163,7 +162,6 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
     BroadcastReceiver downloadBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d(TAG, "onReceive() called with: context = [" + context + "], intent = [" + intent + "]");
             Bundle b = intent.getExtras();
 
             if (b.getString(DownloadService.TAG_STATUS).equals(DownloadService.STATUS_COMPLETE)){
