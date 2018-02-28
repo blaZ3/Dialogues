@@ -3,6 +3,7 @@ package com.example.dialogues.app.welcome;
 import com.example.dialogues.app.models.ItemModel;
 import com.example.dialogues.app.models.ItemRepository;
 import com.example.dialogues.app.models.pojos.ItemResponse;
+import com.example.dialogues.network.DialogueService;
 import com.example.dialogues.network.NetworkClient;
 import com.example.dialogues.utils.log.ILogger;
 
@@ -21,11 +22,11 @@ public class WelcomePresenter {
 
     ItemModel itemModel;
 
-    public WelcomePresenter(WelcomeScreen welcomeScreen, ILogger logger){
+    public WelcomePresenter(WelcomeScreen welcomeScreen, ILogger logger, DialogueService dialogueService){
         this.welcomeScreen = welcomeScreen;
         this.logger = logger;
 
-        this.itemModel = new ItemModel(logger, new ItemRepository(NetworkClient.getDialogueService()));
+        this.itemModel = new ItemModel(logger, new ItemRepository(dialogueService));
     }
 
     /**

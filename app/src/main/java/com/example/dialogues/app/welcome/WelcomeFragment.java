@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.example.dialogues.R;
 import com.example.dialogues.app.models.pojos.Item;
 import com.example.dialogues.databinding.FragmentWelcomeBinding;
+import com.example.dialogues.network.NetworkClient;
 import com.example.dialogues.utils.BaseFragment;
 import com.example.dialogues.utils.log.Logger;
 
@@ -39,7 +40,8 @@ public class WelcomeFragment extends BaseFragment implements WelcomeScreen{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        welcomePresenter = new WelcomePresenter(this, new Logger());
+        welcomePresenter = new WelcomePresenter(this, new Logger(),
+                NetworkClient.getDialogueService());
     }
 
     @Override
