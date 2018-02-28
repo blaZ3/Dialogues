@@ -2,6 +2,7 @@ package com.example.dialogues.network.download;
 
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.example.dialogues.DownloadService;
 import com.example.dialogues.app.models.pojos.Item;
@@ -20,11 +21,12 @@ public class ServiceSoundDownloader implements SoundDownloader {
 
     @Override
     public void download(Item item) {
-        if (DownloadService.shouldAddToDownload(item.getItemId())){ //if download is already queued
+        if (DownloadService.shouldAddToDownload(item.getItemId())){ //if download is not already queued
             Intent downloadServiceIntent = new Intent(context, DownloadService.class);
             downloadServiceIntent.putExtra(DownloadService.TAG_ITEM_ID, item.getItemId());
             downloadServiceIntent.putExtra(DownloadService.TAG_ITEM_LINK, item.getAudio());
             context.startService(downloadServiceIntent);
+            Toast.makeText(context, "Downloading audio for: "+item.getDesc(), Toast.LENGTH_SHORT).show();
         }
     }
 }

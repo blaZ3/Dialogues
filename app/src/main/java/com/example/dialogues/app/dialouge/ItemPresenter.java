@@ -3,9 +3,11 @@ package com.example.dialogues.app.dialouge;
 import com.example.dialogues.app.models.pojos.Item;
 import com.example.dialogues.network.download.SoundDownloader;
 import com.example.dialogues.utils.FileHelper;
+import com.example.dialogues.utils.MusicPlayer;
 import com.example.dialogues.utils.log.ILogger;
 
 import java.io.File;
+import java.io.PushbackInputStream;
 import java.util.ArrayList;
 
 /**
@@ -52,6 +54,19 @@ public class ItemPresenter  {
         }
     }
 
+    public void getNextSoundFile(){
+        int nextPosition = currPosition + 1;
+        if (nextPosition < items.size()){
+            Item nextItem = items.get(nextPosition);
+            File file = FileHelper.getFile(nextItem);
+            if (file != null){
+                //do nothing
+            }else {
+                soundDownloader.download(nextItem);
+            }
+        }
+    }
+
 
     public void gotDownload(String filePath, String url, String id){
         if (id.equals(items.get(currPosition).getItemId())){
@@ -59,4 +74,13 @@ public class ItemPresenter  {
         }
     }
 
+
+    public void startPlayingSound(String absPath){
+        MusicPlayer.getInstance().stop();
+        MusicPlayer.getInstance().play(absPath);
+    }
+
+    public void stopPlayingSound(){
+        MusicPlayer.getInstance().stop();
+    }
 }

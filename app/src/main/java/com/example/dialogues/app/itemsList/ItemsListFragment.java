@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.example.dialogues.R;
 import com.example.dialogues.app.models.pojos.Item;
 import com.example.dialogues.databinding.FragmentItemsListBinding;
+import com.example.dialogues.network.download.ServiceSoundDownloader;
 import com.example.dialogues.utils.BaseFragment;
 import com.example.dialogues.utils.log.Logger;
 
@@ -46,7 +47,7 @@ public class ItemsListFragment extends BaseFragment implements ItemsListScreen{
     public void onAttach(Context context) {
         super.onAttach(context);
         itemsListPresenter = new ItemsListPresenter(this, getMainActivity().getCurrItems(),
-                new Logger());
+                new Logger(), new ServiceSoundDownloader(getMainActivity()));
     }
 
     @Override
@@ -94,8 +95,6 @@ public class ItemsListFragment extends BaseFragment implements ItemsListScreen{
     ItemListAdapter.ItemListAdapterInterface itemListAdapterInterface = new ItemListAdapter.ItemListAdapterInterface() {
         @Override
         public void itemSelected(int position) {
-            Log.d(TAG, "itemSelected() called with: position = [" + position + "]");
-            getMainActivity().showToast(getMainActivity().getCurrItems().get(position).getDesc());
             getMainActivity().navigateToItemFragment(position);
         }
     };
@@ -108,6 +107,9 @@ public class ItemsListFragment extends BaseFragment implements ItemsListScreen{
         dataBinding.recyclerList.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false));
         dataBinding.recyclerList.setAdapter(adapter);
+
+
+        itemsListPresenter.downloadFirst();
     }
 
 

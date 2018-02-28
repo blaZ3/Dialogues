@@ -79,11 +79,9 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
 
         try{
             Log.d(TAG, "onCreateView: registering downloadBroadcastReceiver");
-//            getMainActivity().getApplicationContext().registerReceiver(downloadBroadcastReceiver,
-//                    new IntentFilter(DownloadService.DOWNLOAD_BROADCAST));
-
-            LocalBroadcastManager.getInstance(getMainActivity().getApplicationContext()).registerReceiver(downloadBroadcastReceiver,
-                    new IntentFilter(DownloadService.DOWNLOAD_BROADCAST));
+            LocalBroadcastManager.getInstance(getMainActivity().getApplicationContext())
+                    .registerReceiver(downloadBroadcastReceiver,
+                            new IntentFilter(DownloadService.DOWNLOAD_BROADCAST));
         }catch (Exception ex){
             ex.printStackTrace();
             getMainActivity().showToast(getMainActivity().getString(R.string.error_generic));
@@ -93,10 +91,14 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        itemPresenter.stopPlayingSound();
+
         try{
-            getMainActivity().getApplicationContext().unregisterReceiver(downloadBroadcastReceiver);
+            LocalBroadcastManager.getInstance(getMainActivity().getApplicationContext())
+                    .unregisterReceiver(downloadBroadcastReceiver);
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -113,14 +115,13 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
         dataBinding.setItem(item);
 
         itemPresenter.getSoundFile(item);
+
+        itemPresenter.getNextSoundFile();
     }
 
     @Override
     public void playSound(File file) {
-        getMainActivity().showToast("Playing file:" + file.getAbsolutePath());
-
-        MusicPlayer.getInstance().stop();
-        MusicPlayer.getInstance().play(file.getAbsolutePath());
+        itemPresenter.startPlayingSound(file.getAbsolutePath());
     }
 
     @Override
@@ -131,7 +132,8 @@ public class ItemFragment extends BaseFragment implements ItemScreen{
 
     @Override
     public void goToMain() {
-        //pop other fragment and go to main
+        itemPresenter.stopPlayingSound();
+
         getMainActivity().navigateToMain();
     }
 

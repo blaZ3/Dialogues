@@ -61,10 +61,8 @@ public class DownloadService extends IntentService {
             //add to current downloads
             downloadsQueued.add(id);
 
-
             try {
                 Response<ResponseBody> response = NetworkClient.getDialogueService().downloadFileUrlSync(url).execute();
-//                Response<ResponseBody> response = NetworkClient.getDialogueService().downloadFileUrlSync("https://00e9e64bac8b4eab4e0e784d39e8217cad5d5ba5467a10a255-apidata.googleusercontent.com/download/storage/v1/b/assignment-perpule/o/2514.mp3?qk=AD5uMEsgaiSmp_AkwKgz8m4l4GpBAgEilzK5v4NkM69s39o5WLzfMUGdrgv5kWg0Mw22jPoPJi_KsnDwra8UObrU77sioaz5SqMQSM0BKh9ZkdyUC9LzyTsyS8tHpffIFL5yZf5U4TsHHJrJ6NoVhDYP19lzfLuwVyJ3SKeTxDp03SCAKvR6Ss6Alok87mQrKVSyBwlig2Vka9PgNnl696MC_PuPF0jbbqbm4wS56TP2pgsjoP3tnbeu-h-XR0rm8MgjnCRIiqmveLhqUky_N7afABfCGgxAxoRkiI0aCmEymU7N6JHDsX9lLcMsGnfujnByyhhwy7ABZ6WzlrTP2CUmz0et6f6VABbf3287L-zEbM3rAQl5iFmfbZNawm6K4XMJRTiC-1v46unJeEXqYMLSLyXZLU7cza7dIRzfcxBYnC5D71MM4i6N-IpQ4nphxxpzoScV0N7fFdQHMMMkQvm__JKHmBMdAlP3j_RRVwWvoGBRG0p9V3sSCUg8AOJSaDPKMiKRo38Hyul8Etj5DKnUPYqp_k7ArSUr_xd5eYA7ksE7MPw9p1Yi8HDnVsaKaBz6dLybLsS30MBwQjVyREShaXscG5X_EbZrCI89NRPkaXKUm91RRdnsxJw0suuBrsx_udb0XNSytWQgEbF9dLsU0gLY-Cs8L_mLsvir7WyLL9emuScGgSiYMtc9_x5rZI3sP3mmKkwr3VpkpPFQtZAlndoQQoTHcyaPJTY00NeSVJNOJkFSjlE").execute();
 
                 FileHelper.writeResponseBodyToDisk(response.body(), filePath);
 

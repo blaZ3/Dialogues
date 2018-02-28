@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void navigateToMain(){
+        //pop other fragments and go to main
         getSupportFragmentManager()
                 .popBackStack(TAG_MAIN, 0);
     }

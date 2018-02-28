@@ -45,13 +45,11 @@ public class FileHelper {
         String filePath = getFilePathForItemId(item.getItemId());
         File file = new File(filePath);
 
-//        if (file.exists()){
-//            return file;
-//        }else {
-//            return null;
-//        }
-
-        return null;
+        if (file.exists()){
+            return file;
+        }else {
+            return null;
+        }
     }
 
 

@@ -13,7 +13,7 @@ import retrofit2.http.Url;
 
 public interface DialogueService {
 
-    @GET("gigal")
+    @GET("mxcsl")
     Call<ItemResponse> getDialogues();
 
     @GET
