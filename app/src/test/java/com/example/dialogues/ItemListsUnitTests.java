@@ -19,15 +19,15 @@ import java.util.ArrayList;
  * Created by vivek on 28/02/18.
  */
 
-public class ItemListsUnitTest {
+public class ItemListsUnitTests {
 
 
-    ItemsListPresenter itemsListPresenter;
+    private ItemsListPresenter itemsListPresenter;
 
     @Mock
-    ItemsListScreen screen;
+    private ItemsListScreen screen;
 
-    ArrayList<Item> mockItems;
+    private ArrayList<Item> mockItems;
 
     @Before
     public void setup(){

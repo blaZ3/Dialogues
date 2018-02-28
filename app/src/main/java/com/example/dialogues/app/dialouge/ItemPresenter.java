@@ -83,4 +83,8 @@ public class ItemPresenter  {
     public void stopPlayingSound(){
         MusicPlayer.getInstance().stop();
     }
+
+    public int getCurrPosition() {
+        return currPosition;
+    }
 }
