@@ -60,6 +60,13 @@ public class WelcomeFragment extends BaseFragment implements WelcomeScreen{
             }
         });
 
+        dataBinding.btnWelcomeRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doInit();
+            }
+        });
+
         return dataBinding.getRoot();
     }
 
@@ -78,6 +85,7 @@ public class WelcomeFragment extends BaseFragment implements WelcomeScreen{
 
         dataBinding.progressWelcome.setVisibility(View.GONE);
         dataBinding.btnWelcomeContinue.setVisibility(View.GONE);
+        dataBinding.btnWelcomeRetry.setVisibility(View.GONE);
 
         welcomePresenter.getItems();
     }
@@ -90,17 +98,19 @@ public class WelcomeFragment extends BaseFragment implements WelcomeScreen{
 
     @Override
     public void showNetworkError() {
+        getMainActivity().showToast(getString(R.string.error_network));
 
+        dataBinding.btnWelcomeRetry.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showApiError() {
-
+        getMainActivity().showToast(getString(R.string.error_api));
     }
 
     @Override
     public void showError(String msg) {
-
+        getMainActivity().showToast(getString(R.string.error_generic));
     }
 
     @Override
