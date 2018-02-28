@@ -3,6 +3,7 @@ package com.example.dialogues;
 import com.example.dialogues.app.models.pojos.Item;
 import com.example.dialogues.app.welcome.WelcomePresenter;
 import com.example.dialogues.app.welcome.WelcomeScreen;
+import com.example.dialogues.localPersistance.MockLocalStorage;
 import com.example.dialogues.network.MockNetworkClient;
 import com.example.dialogues.utils.log.UnitTestLogger;
 import com.squareup.okhttp.mockwebserver.MockResponse;
@@ -47,7 +48,8 @@ public class WelcomeUnitTests {
         server.start();
 
         welcomePresenter = new WelcomePresenter(welcomeScreen, new UnitTestLogger(),
-                MockNetworkClient.getDialogueService(server.getUrl("/").toString()));
+                MockNetworkClient.getDialogueService(server.getUrl("/").toString()),
+                new MockLocalStorage());
 
         welcomePresenter.getItems();
 
@@ -71,7 +73,8 @@ public class WelcomeUnitTests {
         server.start();
 
         welcomePresenter = new WelcomePresenter(welcomeScreen, new UnitTestLogger(),
-                MockNetworkClient.getDialogueService(server.getUrl("/").toString()));
+                MockNetworkClient.getDialogueService(server.getUrl("/").toString()),
+                new MockLocalStorage());
 
         welcomePresenter.getItems();
 

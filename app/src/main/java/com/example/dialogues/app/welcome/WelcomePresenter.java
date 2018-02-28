@@ -3,6 +3,8 @@ package com.example.dialogues.app.welcome;
 import com.example.dialogues.app.models.ItemModel;
 import com.example.dialogues.app.models.ItemRepository;
 import com.example.dialogues.app.models.pojos.ItemResponse;
+import com.example.dialogues.localPersistance.LocalStorage;
+import com.example.dialogues.localPersistance.SharedPrefStorage;
 import com.example.dialogues.network.DialogueService;
 import com.example.dialogues.network.NetworkClient;
 import com.example.dialogues.utils.log.ILogger;
@@ -22,11 +24,12 @@ public class WelcomePresenter {
 
     ItemModel itemModel;
 
-    public WelcomePresenter(WelcomeScreen welcomeScreen, ILogger logger, DialogueService dialogueService){
+    public WelcomePresenter(WelcomeScreen welcomeScreen, ILogger logger,
+                            DialogueService dialogueService, LocalStorage localStorage){
         this.welcomeScreen = welcomeScreen;
         this.logger = logger;
 
-        this.itemModel = new ItemModel(logger, new ItemRepository(dialogueService));
+        this.itemModel = new ItemModel(logger, new ItemRepository(dialogueService, localStorage));
     }
 
     /**
